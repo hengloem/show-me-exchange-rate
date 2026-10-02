@@ -1,6 +1,6 @@
 import os
 import sys
-import time
+import asyncio
 import logging
 from datetime import datetime
 
@@ -174,7 +174,7 @@ def send_telegram() -> None:
     message = build_message()
 
     try:
-        bot.send_message(chat_id=CHAT_ID, text=message)
+        asyncio.run(bot.send_message(chat_id=CHAT_ID, text=message))
         logger.info("Message sent successfully.")
     except Exception as exc:
         logger.error("Failed to send Telegram message: %s", exc)
