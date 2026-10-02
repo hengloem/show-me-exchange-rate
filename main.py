@@ -74,18 +74,20 @@ def parse_rates(html: str) -> tuple[str | None, str | None, dict]:
     official_rate = None
     rate_date = None
 
-    for line in text.splitlines():
-        stripped = line.strip()
+    lines = [l.strip() for l in text.splitlines()]
 
-        if "Official Exchange Rate" in stripped:
-            parts = stripped.split(":")
-            if len(parts) > 1:
-                official_rate = parts[-1].strip()
+    for i, line in enumerate(lines):
+        if rate_date is None and "Exchange Rate on" in line:
+            for j in range(i + 1, min(i + 5, len(lines))):
+                if lines[j]:
+                    rate_date = lines[j]
+                    break
 
-        if "Exchange Rate on" in stripped:
-            parts = stripped.split(":")
-            if len(parts) > 1:
-                rate_date = parts[-1].strip()
+        if official_rate is None and "Official Exchange Rate" in line and "Cross Rate" not in line:
+            for j in range(i + 1, min(i + 5, len(lines))):
+                if lines[j]:
+                    official_rate = lines[j]
+                    break
 
     rates: dict[str, dict[str, str]] = {}
 
