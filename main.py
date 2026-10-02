@@ -1,8 +1,9 @@
 import os
 import sys
+import time
 import asyncio
 import logging
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 
 from dotenv import load_dotenv
 
@@ -136,8 +137,11 @@ def build_message() -> str:
     rate_date, official_rate, rates = get_exchange_rates()
 
     msg: list[str] = []
+    # Use today's date (Cambodia timezone, UTC+7)
+    today = datetime.now(timezone(timedelta(hours=7))).strftime("%Y-%m-%d")
+
     msg.append("🏦 NBC Daily Exchange Rate")
-    msg.append(f"📅 {rate_date or 'N/A'}")
+    msg.append(f"📅 {today}")
     msg.append("")
 
     if official_rate:
