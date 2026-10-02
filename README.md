@@ -12,17 +12,14 @@ A Python script that scrapes the daily exchange rates from the National Bank of 
 
 ```
 🏦 NBC Daily Exchange Rate
-📅 2026-10-02
-
+📅 NBC Exchange Rate Date: 2026-10-05
 💵 Official USD Rate: 4057
-
 🔹 THB: Avg 121.50 KHR
 🔹 CNY: Avg 608.00 KHR
 🔹 EUR: Avg 4587.50 KHR
 🔹 SGD: Avg 3188.50 KHR
 🔹 VND: Avg 157.00 KHR
-
-⏰ Updated: 2026-10-02 10:33:03
+⏰ Updated: 2026-10-02 10:41:04
 ```
 
 ## Setup

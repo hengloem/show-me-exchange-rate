@@ -1,8 +1,9 @@
 import os
 import sys
+import time
 import asyncio
 import logging
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 
 from dotenv import load_dotenv
 
@@ -136,13 +137,13 @@ def build_message() -> str:
     rate_date, official_rate, rates = get_exchange_rates()
 
     msg: list[str] = []
+    today = datetime.now(timezone(timedelta(hours=7))).strftime("%Y-%m-%d %H:%M:%S")
+
     msg.append("🏦 NBC Daily Exchange Rate")
-    msg.append(f"📅 {rate_date or 'N/A'}")
-    msg.append("")
+    msg.append(f"📅 NBC Exchange Rate Date: {rate_date or 'N/A'}")
 
     if official_rate:
         msg.append(f"💵 Official USD Rate: {official_rate}")
-        msg.append("")
 
     found_any = False
     for code in WATCH_LIST:
@@ -157,8 +158,7 @@ def build_message() -> str:
     if not found_any:
         msg.append("⚠️ No watched currencies found in today's table.")
 
-    msg.append("")
-    msg.append(f"⏰ Updated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    msg.append(f"⏰ Updated: {today}")
 
     return "\n".join(msg)
 
