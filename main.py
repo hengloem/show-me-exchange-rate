@@ -140,7 +140,7 @@ def build_message() -> str:
     today = datetime.now(timezone(timedelta(hours=7))).strftime("%Y-%m-%d %H:%M:%S")
 
     msg.append("🏦 NBC Daily Exchange Rate")
-    msg.append(f"📅 Exchange Rate Date: {rate_date or 'N/A'}")
+    msg.append(f"📅 NBC Exchange Rate Date: {rate_date or 'N/A'}")
 
     if official_rate:
         msg.append(f"💵 Official USD Rate: {official_rate}")
